@@ -1,0 +1,17 @@
+.no-margin{
+    margin: 0;
+}
+.no-padding{
+    padding: 0;
+}
+
+.padding-md{
+    padding: 2em;
+}
+.padding-sm{
+    padding: 5px;
+}
+
+.margin-sm{
+    margin: 5px;
+}

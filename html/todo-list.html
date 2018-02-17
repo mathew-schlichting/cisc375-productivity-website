@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>To-Do List</title>
+
+        <!-- Custom Style -->
+        <link rel="stylesheet" href="../css/todo-list-style.css"/>
+        <link rel="stylesheet" href="../css/spacing.css"/>
+
+
+    </head>
+    <body class="no-margin no-padding">
+        <div id="page" class="no-margin no-padding">
+            <div id="page-content" class="no-margin">
+                <!-- Everything goes inside of here -->
+
+
+                <!-- Holds all of the actions to be done -->
+                <nav class="padding-md top-action-bar">
+                    <button class="button-separator" onclick="openItemCreator()">Add New</button>
+
+                    <span class="button-separator">
+                        <select id="sorting-options">
+                            <option value="CategoryUp">Category &uarr;</option>
+                            <option value="CategoryDown">Category &darr;</option>
+                            <option value="DateUp">Date &uarr;</option>
+                            <option value="DateDown">Date &darr;</option>
+                            <option value="Incomplete">Incomplete</option>
+                        </select>
+                        <button onclick="sortList()">Sort</button>
+                    </span>
+                </nav>
+
+                <div id="board-container" class="padding-md">
+                    <div id="todo-board" class="border-basic-rounded-md">
+                        <ul id="todo-list">
+                            <!-- Items are loaded into here -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- position is fixed and covers whole page to dim the page for better look -->
+                <div id="dimmer"></div>
+
+                <div id="new-item" class="padding-md border-basic-rounded-md pop-up">
+                    <h4 style="margin-top: 0;">
+                        Add Item:
+                    </h4>
+
+                    <div class="margin-sm">
+                        <div class="margin-sm">
+                            <span>Name: </span><input id="input-name" type="text"/>
+                        </div>
+                        <div class="margin-sm">
+                            <span>Description: </span><input id="input-description" type="text"/>
+                        </div>
+                        <div class="margin-sm">
+                            <span>Deadline: </span><input id="input-deadline" type="date" value="2018-01-01"/>
+                        </div>
+                        <div class="margin-sm">
+                            <span>Category: </span>
+                            <select id="input-category">
+                                <!-- options are filled on page load -->
+                            </select>
+                            <input id="input-new-category-name" type="text" placeholder="Name of new Category"/>
+                            <input id="input-new-category-color" type="text" placeholder="Color name or hex value"/>
+                            <button onclick="submitCategory()">+</button>
+                        </div>
+                    </div>
+
+                    <button onclick="submitItem()">Add</button>
+                    <button onclick="closeItemCreator()">Cancel</button>
+                </div>
+
+                <div id="delete-popup" class="pop-up border-basic-rounded-md padding-md">
+                    <h3>
+                        Are you sure?
+                    </h3>
+                    <div>
+                        <button class="button-separator" onclick="confirmDelete()">Yes</button>
+                        <button class="button-separator" onclick="closeDeletePopup()">No</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </body>
+
+
+    <!-- Custom JS -->
+    <script src="../js/todo-list-script.js" type="text/javascript"></script>
+
+</html>

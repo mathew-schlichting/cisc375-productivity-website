@@ -1,0 +1,67 @@
+
+html{
+
+}
+
+body{
+    font-family: Cambria, SansSerif;
+}
+
+#page{
+    background-color: azure;
+}
+
+.list-item {
+    width: 20em;
+}
+
+#board-container{
+    width: 50vw;
+    height: auto;
+}
+
+.board{
+    background-image: url("../media/images/cork-middle.png");
+    background-repeat: repeat-y;
+    background-size: 100%;
+    width: 100%;
+    height: auto;
+}
+.board-ends{
+    width: 100%;
+    height: auto;
+}
+
+.border-basic-rounded-md{
+    border-radius: 10px;
+    border: black solid 2px;
+}
+
+.button-separator{
+    margin-left: 50px;
+}
+.top-action-bar{
+    background-color: lightseagreen;
+}
+
+
+.pop-up{
+    visibility: hidden;
+    position: fixed;
+    left: 30vw;
+    top:  150px;
+    z-index: 2;
+    background-color: azure;
+}
+
+#dimmer{
+    visibility: hidden;
+    position: fixed;
+    left: 0;
+    top:  0;
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+    opacity: .7;
+    z-index: 1;
+}
