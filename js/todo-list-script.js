@@ -46,16 +46,24 @@ addCategory('Work', '#e3b2f7');
 addCategory('Chores', '#fc9494');
 addCategory('Shopping', '#fff3ba');
 resetNewItem();
+loadFromStorage();
 
 
 
 
-addItem('test1', 'test', '2018-01-02', categories[0]);
-addItem('test2', 'test', '2018-01-01', categories[0]);
-addItem('test3', 'test', '2018-01-01', categories[1]);
-addItem('test4', 'test', '2018-01-03', categories[2]);
+function loadFromStorage(){
 
 
+    var temp = localStorage.getItem('todoList');
+    if(temp === null){
+        listObjects = [];
+    }
+    else{
+        listObjects = JSON.parse(temp);
+    }
+
+    reloadList()
+}
 
 
 function submitItem(){
@@ -119,6 +127,10 @@ function toggleComplete(element){
 
 }
 
+function updateSavedList(){
+    localStorage.setItem('todoList', JSON.stringify(listObjects));
+}
+
 function addItem(taskName, taskDescription, taskDeadline, taskCategory){
     var item = {name: taskName, description: taskDescription, deadline: taskDeadline, category: taskCategory, timestamp: new Date().toDateString(), complete: false};
     var listDom = document.getElementById('todo-list');
@@ -126,6 +138,7 @@ function addItem(taskName, taskDescription, taskDeadline, taskCategory){
     listObjects.push(item);
     listDom.innerHTML += makeHTML(item);
 
+    updateSavedList();
     closeItemCreator();
 }
 
@@ -155,6 +168,7 @@ function confirmDelete(){
         }
     }
     closeDeletePopup();
+    updateSavedList();
     reloadList();
 }
 
