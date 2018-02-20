@@ -39,21 +39,43 @@ var sortTechniques = {
     }
 };
 
-
-/* Init functionality */
-addCategory('School', '#adccff');
-addCategory('Work', '#e3b2f7');
-addCategory('Chores', '#fc9494');
-addCategory('Shopping', '#fff3ba');
-resetNewItem();
-loadFromStorage();
+var canvas;
+var context;
 
 
 
+function init(){
+    /* Init functionality */
+    addCategory('School', '#adccff');
+    addCategory('Work', '#e3b2f7');
+    addCategory('Chores', '#fc9494');
+    addCategory('Shopping', '#fff3ba');
+    resetNewItem();
+    loadFromStorage();
+    checkForEmptyList();
+
+    canvas = document.getElementById('pie-chart');
+    context = canvas.getContext('2d');
+    updatePieChart();
+}
+
+function updatePieChart(){
+    var radius = 60;
+    var startAngle = 0;
+    var centerX = 150;
+    var centerY = 75;
+    var endAngle = Math.PI * 1; // End point on circle
+
+    context.
+    context.beginPath();
+
+    context.arc(centerX, centerY, radius, startAngle, endAngle);
+    context.stroke();
+
+
+}
 
 function loadFromStorage(){
-
-
     var temp = localStorage.getItem('todoList');
     if(temp === null){
         listObjects = [];
@@ -127,8 +149,18 @@ function toggleComplete(element){
 
 }
 
+function checkForEmptyList(){
+    if(listObjects.length > 0){
+        document.getElementById('board-container').style.visibility = 'visible';
+    }
+    else{
+        document.getElementById('board-container').style.visibility = 'hidden';
+    }
+}
+
 function updateSavedList(){
     localStorage.setItem('todoList', JSON.stringify(listObjects));
+    checkForEmptyList();
 }
 
 function addItem(taskName, taskDescription, taskDeadline, taskCategory){

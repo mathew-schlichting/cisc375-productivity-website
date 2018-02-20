@@ -15,3 +15,15 @@
 .margin-sm{
     margin: 5px;
 }
+
+.float-right{
+    float: right;
+}
+
+.float-left{
+    float: left;
+}
+
+.margin-lg{
+    margin: 30px;
+}

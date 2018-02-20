@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Photo Gallery</title>
+
+
+        <!-- Custom Style -->
+        <link rel="stylesheet" href="../css/photo-gallery-style.css"/>
+        <link rel="stylesheet" href="../css/spacing.css"/>
+
+    </head>
+    <body onload="init();">
+        <div id="page" class="no-margin no-padding">
+            <div id="page-content" class="no-margin">
+
+
+                <!-- little thumbnails on page -->
+                <div id="table-container">
+                    <table id="picture-table"></table>
+                </div>
+
+
+
+
+
+
+                <!-- The big picture slideshow viewer -->
+                <div id="slideshow">
+                    <span class="close-button" onclick="closeSlideshow()">&times;</span>
+                    <div class="modal-content">
+
+                        <div class="slide">
+                            <div class="numbertext">1 / 4</div>
+                            <img src="../media/images/pic1.jpg" style="width:100%">
+                        </div>
+
+                        <div class="slide">
+                            <div class="numbertext">2 / 4</div>
+                            <img src="../media/images/pic2.jpg" style="width:100%">
+                        </div>
+
+                        <div class="slide">
+                            <div class="numbertext">3 / 4</div>
+                            <img src="../media/images/pic3.jpg" style="width:100%">
+                        </div>
+
+                        <div class="slide">
+                            <div class="numbertext">4 / 4</div>
+                            <img src="../media/images/pic4.jpg" style="width:100%">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+
+    <!-- Custom JS -->
+    <script src="../js/photo-gallery-script.js" type="text/javascript"></script>
+
+</html>

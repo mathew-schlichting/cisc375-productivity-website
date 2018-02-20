@@ -10,7 +10,7 @@
 
 
     </head>
-    <body class="no-margin no-padding">
+    <body class="no-margin no-padding" onload="init();">
         <div id="page" class="no-margin no-padding">
             <div id="page-content" class="no-margin">
                 <!-- Everything goes inside of here -->
@@ -32,13 +32,24 @@
                     </span>
                 </nav>
 
-                <div id="board-container" class="padding-md">
-                    <div id="todo-board" class="border-basic-rounded-md">
-                        <ul id="todo-list">
-                            <!-- Items are loaded into here -->
-                        </ul>
+
+                <div>
+                    <div id="board-container" class="padding-md float-left">
+                        <div id="todo-board" class="border-basic-rounded-md">
+                            <ul id="todo-list">
+                                <!-- Items are loaded into here -->
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="float-right padding-md">
+                        <canvas id="pie-chart" class="border-basic-rounded-md">
+
+                        </canvas>
                     </div>
                 </div>
+
+
 
                 <!-- position is fixed and covers whole page to dim the page for better look -->
                 <div id="dimmer"></div>
