@@ -19,27 +19,21 @@
     height: 100vh;
 }
 
-body{
-    margin: 0;
-    padding: 0;
-}
 
-#slideshow{
+#slideshow-container{
     display: none;
     position: fixed;
     z-index: 1;
-    padding-top: 100px;
     left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
+    width: 100vw;
+    height: 100vh;
     background-color: black;
 }
 
 
 .slide {
-    margin: 0 20vw;
+    margin: 10vh 20vw;
     display: none;
     width: 60vw;
     height: auto;
@@ -59,5 +53,4 @@ body{
 #table-container{
     margin: 5vh 15vw;
     width: 70vw;
-
 }

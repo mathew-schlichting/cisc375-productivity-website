@@ -52,12 +52,12 @@ function unhoverImage(element){
 
 
 function openSlideshow() {
-    document.getElementById('slideshow').style.display = "block";
+    document.getElementById('slideshow-container').style.display = "block";
     showSlides(1);
 }
 
 function closeSlideshow() {
-    document.getElementById('slideshow').style.display = "none";
+    document.getElementById('slideshow-container').style.display = "none";
 }
 
 

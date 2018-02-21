@@ -27,3 +27,8 @@
 .margin-lg{
     margin: 30px;
 }
+
+body{
+    margin: 0;
+    padding: 0;
+}
