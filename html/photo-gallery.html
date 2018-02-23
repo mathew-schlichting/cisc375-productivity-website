@@ -9,6 +9,8 @@
         <link rel="stylesheet" href="../css/photo-gallery-style.css"/>
         <link rel="stylesheet" href="../css/spacing.css"/>
 
+
+
     </head>
     <body onload="init();">
         <div id="page" class="no-margin no-padding">
@@ -22,33 +24,11 @@
 
 
 
-
-
-
                 <!-- The big picture slideshow viewer -->
-                <div id="slideshow">
+                <div id="slideshow-view">
                     <span class="close-button" onclick="closeSlideshow()">&times;</span>
-                    <div class="modal-content">
-
-                        <div class="slide">
-                            <div class="numbertext">1 / 4</div>
-                            <img src="../media/images/pic1.jpg" style="width:100%">
-                        </div>
-
-                        <div class="slide">
-                            <div class="numbertext">2 / 4</div>
-                            <img src="../media/images/pic2.jpg" style="width:100%">
-                        </div>
-
-                        <div class="slide">
-                            <div class="numbertext">3 / 4</div>
-                            <img src="../media/images/pic3.jpg" style="width:100%">
-                        </div>
-
-                        <div class="slide">
-                            <div class="numbertext">4 / 4</div>
-                            <img src="../media/images/pic4.jpg" style="width:100%">
-                        </div>
+                    <div id="slideshow">
+                       <!-- slides are loaded into here -->
                     </div>
                 </div>
             </div>

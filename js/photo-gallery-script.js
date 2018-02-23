@@ -1,9 +1,8 @@
 "use strict";
 
 
-var slideIndex = 1;
-
-
+var currentSlide = 1;
+var slideElements = [];
 
 
 function init(){
@@ -11,11 +10,28 @@ function init(){
 
 
 
-    loadPictures();
+
+    loadThumbnails();
+    loadSlideshow();
+    slideElements = document.getElementsByClassName("slide");
+
+    window.onkeyup = keyup;
+}
+
+function loadSlideshow(){
+    var slideshow = document.getElementById('slideshow');
+    var i;
+    var html = '';
+
+    for(i=0; i<20; i++){
+        html += getSlideData(i+1);
+    }
+
+    slideshow.innerHTML = html;
 }
 
 
-function loadPictures(){
+function loadThumbnails(){
     var table = document.getElementById('picture-table');
     var i;
     var j;
@@ -32,53 +48,88 @@ function loadPictures(){
     table.innerHTML = html;
 }
 
+function getSlideData(i){
+    return '<div class="slide transparent"><img src="../media/images/pic' + i + '.jpg" style="width: 100%; height: 100%;"></div>';
+}
+
 function getTableData(i){
-    return '<td><div id="picture-' +i+ '" class="picture-tile-container"><img class="picture-tile" onclick="openSlideshow()" onmouseenter="hoverImage(this);" onmouseleave="unhoverImage(this);" src="../media/images/pic' + i + '-thumb.jpg"/></div></td>';
-}
-
-function hoverImage(element){
-    element.style.width = '168px';
-    element.style.height = '120px';
-    element.style.left = '0';
-    element.style.top = '0';
-}
-
-function unhoverImage(element){
-    element.style.width = '140px';
-    element.style.height = '100px';
-    element.style.left = '14px';
-    element.style.top = '10px';
+    return '<td><div id="picture-' +i+ '" class="picture-tile-container" onclick="openSlideshow(this)" ><img class="picture-tile" src="../media/images/pic' + i + '-thumb.jpg"/></div></td>';
 }
 
 
-function openSlideshow() {
-    document.getElementById('slideshow').style.display = "block";
-    showSlides(1);
+function openSlideshow(element) {
+    var view = document.getElementById('slideshow-view');
+    view.style.display = "block";
+
+
+
+    // get id to bring up correct picture
+    var id = element.id.split('-')[1];
+    changeSlide(id - 1);
 }
 
 function closeSlideshow() {
-    document.getElementById('slideshow').style.display = "none";
+    document.getElementById('slideshow-view').style.display = "none";
 }
 
 
 
-function showSlides(n) {
-    var i;
-    var slides = document.getElementsByClassName("slide");
-    if (n > slides.length) {slideIndex = 1}
-    if (n < 1) {slideIndex = slides.length}
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
+
+function keyup(event){
+    if(event.keyCode === 37){//left arrow key
+        prevSlide();
     }
-    slides[slideIndex-1].style.display = "block";
+    else if(event.keyCode === 39){//right arrow key
+        nextSlide();
+    }
+    else if(event.keyCode === 27){//escape key
+        closeSlideshow();
+    }
 }
 
-// Next/previous controls
-function plusSlides(n) {
-    showSlides(slideIndex += n);
+function nextSlide(){
+    changeSlide((currentSlide+1)%slideElements.length);
 }
 
-// Thumbnail image controls
-function currentSlide(n) {
-    showSlides(slideIndex = n);
+function prevSlide(){
+    changeSlide((currentSlide + slideElements.length - 1) % slideElements.length);
 }
+
+function changeSlide(slide) {
+    fadeOut(slideElements[currentSlide], 50);
+    currentSlide = slide;
+    fadeIn(slideElements[currentSlide], 50);
+}
+
+function fadeOut(element, speed){
+    var o;
+    o = 1;
+
+    var fade = setInterval(function(){
+        element.style.opacity = o;
+        o -= .1;
+        if(o <= 0){
+            clearInterval(fade);
+            element.style.display = 'none';
+        }
+    }, speed);
+}
+
+function fadeIn(element, speed){
+    var o;
+
+    o = 0;
+    element.style.opacity = o;
+    element.style.display = 'block';
+
+    var fade = setInterval(function(){
+        element.style.opacity = o;
+        o += .1;
+        if(o >= 1){
+            clearInterval(fade);
+        }
+    }, speed);
+}
+
+
+
