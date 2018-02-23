@@ -64,9 +64,8 @@ function updatePieChart(){
     var startAngle = 0;
     var centerX = 150;
     var centerY = 75;
-    var endAngle = Math.PI * 1; // End point on circle
+    var endAngle = Math.PI * 2; // End point on circle
 
-    context.
     context.beginPath();
 
     context.arc(centerX, centerY, radius, startAngle, endAngle);

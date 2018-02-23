@@ -8,6 +8,7 @@ var slideElements = [];
 function init(){
     console.log('Version 0.0.1');
 
+    var i;
 
 
 
@@ -15,7 +16,7 @@ function init(){
     loadSlideshow();
     slideElements = document.getElementsByClassName("slide");
 
-    window.onkeyup = keyup;
+    window.onkeyup = keyPress;
 }
 
 function loadSlideshow(){
@@ -48,8 +49,9 @@ function loadThumbnails(){
     table.innerHTML = html;
 }
 
+
 function getSlideData(i){
-    return '<div class="slide transparent"><img src="../media/images/pic' + i + '.jpg" style="width: 100%; height: 100%;"></div>';
+    return '<div class="slide"><img src="../media/images/pic' + i + '.jpg" style="width: 100%; height: 100%;"></div>';
 }
 
 function getTableData(i){
@@ -59,23 +61,19 @@ function getTableData(i){
 
 function openSlideshow(element) {
     var view = document.getElementById('slideshow-view');
-    view.style.display = "block";
-
-
-
+    view.style.display = 'block';
+    
     // get id to bring up correct picture
     var id = element.id.split('-')[1];
-    currentSlide = id - 1;
-    fadeIn(slideElements[currentSlide], 50);}
+    focusSlide(id - 1);
+}
 
 function closeSlideshow() {
-    document.getElementById('slideshow-view').style.display = "none";
+    document.getElementById('slideshow-view').style.display = 'none';
 }
 
 
-
-
-function keyup(event){
+function keyPress(event){
     if(event.keyCode === 37){//left arrow key
         prevSlide();
     }
@@ -95,10 +93,14 @@ function prevSlide(){
     changeSlide((currentSlide + slideElements.length - 1) % slideElements.length);
 }
 
-function changeSlide(slide) {
-    fadeOut(slideElements[currentSlide], 50);
+function focusSlide(slide){
     currentSlide = slide;
-    fadeIn(slideElements[currentSlide], 50);
+    fade(slideElements[currentSlide], 0, 1, 20);//fade in new)
+}
+
+function changeSlide(slide) {
+    fade(slideElements[currentSlide], 1, -1, 20);//fade out old
+    focusSlide(slide)
 }
 
 function fadeOut(element, speed){
@@ -115,18 +117,25 @@ function fadeOut(element, speed){
     }, speed);
 }
 
-function fadeIn(element, speed){
+function fade(element, start, direction, speed){
     var o;
 
-    o = 0;
+    o = start;
     element.style.opacity = o;
-    element.style.display = 'block';
+
+    if(direction > 0) {
+        element.style.display = 'block';
+    }
 
     var fade = setInterval(function(){
         element.style.opacity = o;
-        o += .1;
+        o += .1 * direction;
         if(o >= 1){
             clearInterval(fade);
+        }
+        else if(o <= 0){
+            clearInterval(fade);
+            element.style.display = 'none';
         }
     }, speed);
 }
