@@ -65,8 +65,8 @@ function openSlideshow(element) {
 
     // get id to bring up correct picture
     var id = element.id.split('-')[1];
-    changeSlide(id - 1);
-}
+    currentSlide = id - 1;
+    fadeIn(slideElements[currentSlide], 50);}
 
 function closeSlideshow() {
     document.getElementById('slideshow-view').style.display = "none";
