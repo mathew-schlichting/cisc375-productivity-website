@@ -3,20 +3,45 @@
 
 var currentSlide = 1;
 var slideElements = [];
-
+var thumbElements = [];
+var firstTime = true;
 
 function init(){
-    console.log('Version 0.0.1');
+    console.log('Version 0.0.2');
 
-    var i;
 
 
 
     loadThumbnails();
     loadSlideshow();
-    slideElements = document.getElementsByClassName("slide");
+    slideElements = document.getElementsByClassName('slide');
+
+    loadSlideThumb();
+    thumbElements = document.getElementsByClassName('slide-thumb');
 
     window.onkeyup = keyPress;
+}
+
+function loadSlideThumb(){
+    var thumbs = document.getElementById('slide-thumbs');
+    var i;
+    var html = '';
+
+
+    //add offset of 3 to look nice
+    for(i=0; i<3;i++){
+        html += '<div class="slide-thumb"></div>';
+    }
+    for(i=0; i<20; i++){
+        html += getThumbSliderData(i+1);
+    }
+
+    //add offset of 3 to look nice
+    for(i=0; i<3;i++){
+        html += '<div class="slide-thumb"></div>';
+    }
+
+    thumbs.innerHTML = html;
 }
 
 function loadSlideshow(){
@@ -49,6 +74,9 @@ function loadThumbnails(){
     table.innerHTML = html;
 }
 
+function getThumbSliderData(i){
+    return '<div id="thumb-'+ i + '" onclick="slideThumbClick(this);" class="slide-thumb"><img src="../media/images/pic' + i + '-thumb.jpg" style="width: 100%; height: 100%;"></div>';
+}
 
 function getSlideData(i){
     return '<div class="slide"><img src="../media/images/pic' + i + '.jpg" style="width: 100%; height: 100%;"></div>';
@@ -59,15 +87,26 @@ function getTableData(i){
 }
 
 
+function slideThumbClick(element){
+    var id = element.id.split('-')[1];
+    changeSlide(id-1);
+}
+
 function openSlideshow(element) {
     var view = document.getElementById('slideshow-view');
     view.style.display = 'block';
-    
+
     // get id to bring up correct picture
     var id = element.id.split('-')[1];
-    focusSlide(id - 1);
-}
 
+    if(firstTime){
+        focusSlide(id-1);
+        firstTime = false;
+    }
+    else{
+        changeSlide(id-1);
+    }
+}
 function closeSlideshow() {
     document.getElementById('slideshow-view').style.display = 'none';
 }
@@ -96,6 +135,15 @@ function prevSlide(){
 function focusSlide(slide){
     currentSlide = slide;
     fade(slideElements[currentSlide], 0, 1, 20);//fade in new)
+
+    var i;
+    for(i=0; i<thumbElements.length; i++){
+        thumbElements[i].style.display = 'none';
+    }
+    for(i=0; i<7; i++){
+        thumbElements[currentSlide + i].style.display = 'block';
+    }
+
 }
 
 function changeSlide(slide) {

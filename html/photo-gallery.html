@@ -26,10 +26,17 @@
 
                 <!-- The big picture slideshow viewer -->
                 <div id="slideshow-view">
-                    <span class="close-button" onclick="closeSlideshow()">&times;</span>
+                    <span class="close slideshow-button darken" onclick="closeSlideshow()">&times;</span>
+                    <span class="arrow prev slideshow-button darken" onclick="prevSlide()">&#10094;</span>
+                    <span class="arrow next slideshow-button darken" onclick="nextSlide()">&#10095;</span>
                     <div id="slideshow">
                        <!-- slides are loaded into here -->
                     </div>
+
+                    <div id="slide-thumbs" class="thumb-slider slideshow-button">
+                        <!-- thumb nails for skipping in here -->
+                    </div>
+
                 </div>
             </div>
         </div>
