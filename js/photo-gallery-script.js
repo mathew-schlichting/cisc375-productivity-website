@@ -5,6 +5,8 @@ var currentSlide = 1;
 var slideElements = [];
 var thumbElements = [];
 var firstTime = true;
+var playing = false;
+
 
 function init(){
     console.log('Version 0.0.2');
@@ -186,6 +188,21 @@ function fade(element, start, direction, speed){
             element.style.display = 'none';
         }
     }, speed);
+}
+
+function playSlideshow(element){
+    if(playing){
+        element.innerHTML = '&#9654;';
+    }
+    else {
+        element.innerHTML = '&#8741;';
+    }
+
+
+    playing = !playing;
+
+    //todo play slideshow
+
 }
 
 

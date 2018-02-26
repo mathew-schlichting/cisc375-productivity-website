@@ -116,3 +116,15 @@ body{
 .slide-thumb:hover{
     transform: scale(1.1);
 }
+
+.play-button-container{
+    width: 100vw;
+}
+
+.play{
+    width: 6vw;
+    font-size: 2em;
+    margin-left: 47vw;
+    top: 44vw;
+    height: 2em;
+}
