@@ -46,17 +46,14 @@ var context;
 
 function init(){
     /* Init functionality */
-    addCategory('School', '#adccff');
-    addCategory('Work', '#e3b2f7');
-    addCategory('Chores', '#fc9494');
-    addCategory('Shopping', '#fff3ba');
-    resetNewItem();
     loadFromStorage();
     checkForEmptyList();
 
     canvas = document.getElementById('pie-chart');
     context = canvas.getContext('2d');
     updatePieChart();
+
+    resetNewItem();
 }
 
 function updatePieChart(){
@@ -75,15 +72,29 @@ function updatePieChart(){
 }
 
 function loadFromStorage(){
-    var temp = localStorage.getItem('todoList');
+    var temp;
+
+    temp = localStorage.getItem('categories');
+    if(temp === null){
+        console.log('in here');
+        categories = [];
+        addCategory('School', '#adccff');
+        addCategory('Work', '#e3b2f7');
+        addCategory('Chores', '#fc9494');
+        addCategory('Shopping', '#fff3ba');
+    }
+    else{
+        categories = JSON.parse(temp);
+    }
+
+    temp = localStorage.getItem('todoList');
     if(temp === null){
         listObjects = [];
     }
     else{
         listObjects = JSON.parse(temp);
     }
-
-    reloadList()
+    reloadList();
 }
 
 
@@ -159,6 +170,7 @@ function checkForEmptyList(){
 
 function updateSavedList(){
     localStorage.setItem('todoList', JSON.stringify(listObjects));
+    localStorage.setItem('categories', JSON.stringify(categories));
     checkForEmptyList();
 }
 
@@ -229,6 +241,10 @@ function closeItemCreator(){
     newItem.style.visibility = 'hidden';
 }
 
+function updateSavedCategories(){
+    localStorage.setItem('categories', JSON.stringify(categories));
+}
+
 function addCategory(catName, catColor){
     var categoryInput = document.getElementById('input-category');
     var obj;
@@ -238,6 +254,8 @@ function addCategory(catName, catColor){
     obj = {name: catName, color: catColor};
 
     categories.push(obj);
+
+    updateSavedCategories();
 }
 
 function submitCategory() {
@@ -259,14 +277,18 @@ function submitCategory() {
     }
 }
 
+function clearAllStorage(){
+    localStorage.clear();
+}
+
 function resetNewItem(){
     var nameInput = document.getElementById('input-name');
     var descriptionInput = document.getElementById('input-description');
     var deadlineInput = document.getElementById('input-deadline');
     var categoryInput = document.getElementById('input-category');
 
-    nameInput.value = 'test';
-    descriptionInput.value = 'test';
+    nameInput.value = '';
+    descriptionInput.value = '';
     deadlineInput.value = '2018-01-01'; //todo
     categoryInput.value = categories[0].name;
 }

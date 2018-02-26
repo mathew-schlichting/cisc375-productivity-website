@@ -19,7 +19,6 @@
     padding: 0;
     background-color: lightcyan;
     height: 100vh;
-
     position: fixed;
     left: 0;
     top: 0;
@@ -64,7 +63,6 @@ body{
     top: 1vw;
     right: 2vw;
     font-size: 3em;
-    font-weight: bold;
     float: right;
 }
 
@@ -75,20 +73,20 @@ body{
 
 .slideshow-button{
     cursor: pointer;
-    position: absolute;
+    position: fixed;
     color: white;
     z-index: 1;
     user-select: none;
 }
 
 .arrow{
-    font-size: 8em;
-    top: 20vh;
-    width: 5vw;
+    font-size: 5vw;
+    top: 10vw;
+    width: 3vw;
 }
 
 .prev{
-    left: 20vw;
+    left: 22vw;
 }
 
 .next {

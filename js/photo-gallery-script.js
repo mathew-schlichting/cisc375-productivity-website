@@ -5,7 +5,7 @@ var currentSlide = 1;
 var slideElements = [];
 var thumbElements = [];
 var firstTime = true;
-var playing = false;
+var playing = null;
 
 
 function init(){
@@ -92,6 +92,7 @@ function getTableData(i){
 function slideThumbClick(element){
     var id = element.id.split('-')[1];
     changeSlide(id-1);
+    clearPlay(document.getElementById('play-button'));
 }
 
 function openSlideshow(element) {
@@ -111,6 +112,7 @@ function openSlideshow(element) {
 }
 function closeSlideshow() {
     document.getElementById('slideshow-view').style.display = 'none';
+    clearPlay(document.getElementById('play-button'));
 }
 
 
@@ -153,19 +155,6 @@ function changeSlide(slide) {
     focusSlide(slide)
 }
 
-function fadeOut(element, speed){
-    var o;
-    o = 1;
-
-    var fade = setInterval(function(){
-        element.style.opacity = o;
-        o -= .1;
-        if(o <= 0){
-            clearInterval(fade);
-            element.style.display = 'none';
-        }
-    }, speed);
-}
 
 function fade(element, start, direction, speed){
     var o;
@@ -190,19 +179,24 @@ function fade(element, start, direction, speed){
     }, speed);
 }
 
-function playSlideshow(element){
-    if(playing){
+function clearPlay(element){
+    if(playing != null) {
         element.innerHTML = '&#9654;';
+        clearInterval(playing);
+        playing = null;
+    }
+}
+
+function playSlideshow(element){
+    if(playing != null){
+        clearPlay(element);
     }
     else {
         element.innerHTML = '&#8741;';
+        playing = setInterval(function(){
+            nextSlide();
+        }, 10000);
     }
-
-
-    playing = !playing;
-
-    //todo play slideshow
-
 }
 
 

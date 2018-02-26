@@ -26,16 +26,8 @@ canvas{
     height: 300px;
 }
 
-.board{
-    background-image: url("../media/images/cork-middle.png");
-    background-repeat: repeat-y;
-    background-size: 100%;
-    width: 100%;
-    height: auto;
-}
-.board-ends{
-    width: 100%;
-    height: auto;
+.pull-right{
+    float: right;
 }
 
 .border-basic-rounded-md{
