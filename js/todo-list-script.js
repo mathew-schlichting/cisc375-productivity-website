@@ -54,6 +54,7 @@ function init(){
     canvas.width = 300;
     canvas.height = 300;
     updatePieChart();
+    canvas.onmousemove = canvasMouseMove;
 
     resetNewItem();
 }
@@ -89,6 +90,7 @@ function updatePieChart(){
         context.arc     (centerX, centerY, centerY, prevSection, prevSection + (Math.PI * 2 * (numberOfCategories[categories[i].name] / listObjects.length)), false);
         context.lineTo  (centerX, centerY);
         context.fill();
+        context.addHitRegion({id: ('test' + i)});
         prevSection += Math.PI * 2 * (numberOfCategories[categories[i].name] / listObjects.length);
     }
 }
@@ -348,4 +350,8 @@ function resetNewItem(){
     descriptionInput.value = '';
     deadlineInput.value = '2018-01-01'; //todo
     categoryInput.value = categories[0].name;
+}
+
+function canvasMouseMove(event){
+
 }
