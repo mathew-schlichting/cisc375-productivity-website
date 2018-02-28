@@ -54,7 +54,7 @@ body{
     margin: 0 25vw;
     display: none;
     width: 50vw;
-    height: 35vw;
+    height: 35vw;//change
     position: fixed;
     animation: fadeInAnimation 1s;
 }
