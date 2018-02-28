@@ -41,7 +41,7 @@ var sortTechniques = {
 
 var canvas;
 var context;
-
+var sections = [];
 
 
 function init(){
@@ -59,41 +59,6 @@ function init(){
     resetNewItem();
 }
 
-function updatePieChart(){
-    var prevSection = 0;
-    var numberOfCategories = {};
-    var i;
-    var centerX, centerY;
-
-    //clear first pie chart
-    context.fillStyle = 'white';
-    context.fillRect(0, 0, canvas.width, canvas.height);
-
-    //find center of canvas
-    centerX = canvas.width  / 2;
-    centerY = canvas.height / 2;
-
-    //set all objects to zero
-    for(i=0; i<categories.length; i++){
-        numberOfCategories[categories[i].name] = 0;
-    }
-
-    //count all categories
-    for(i=0; i<listObjects.length; i++){
-        numberOfCategories[listObjects[i].category.name]++;
-    }
-
-    //draw each section
-    for(i=0; i<categories.length; i++){
-        context.fillStyle = categories[i].color;
-        context.beginPath();
-        context.arc     (centerX, centerY, centerY, prevSection, prevSection + (Math.PI * 2 * (numberOfCategories[categories[i].name] / listObjects.length)), false);
-        context.lineTo  (centerX, centerY);
-        context.fill();
-        context.addHitRegion({id: ('test' + i)});
-        prevSection += Math.PI * 2 * (numberOfCategories[categories[i].name] / listObjects.length);
-    }
-}
 
 /* This loads the to-dos and the categories saved */
 function loadFromStorage(){
@@ -143,7 +108,7 @@ function submitItem(){
     }
 
     if(add) {
-        addItem(nameInput.value, descriptionInput.value, deadlineInput.value, getCategory(categoryInput.value));
+        addItem(nameInput.value, descriptionInput.value, deadlineInput.value, getCategory(categoryInput.value), false);
         resetNewItem();
     }
 
@@ -212,8 +177,8 @@ function updateSavedList(){
 
 
 //add an item to the list object
-function addItem(taskName, taskDescription, taskDeadline, taskCategory){
-    var item = {name: taskName, description: taskDescription, deadline: taskDeadline, category: taskCategory, timestamp: new Date().toDateString(), complete: false};
+function addItem(taskName, taskDescription, taskDeadline, taskCategory, isHighlighted){
+    var item = {name: taskName, description: taskDescription, deadline: taskDeadline, category: taskCategory, timestamp: new Date().toDateString(), complete: false, highlighted: isHighlighted};
     var listDom = document.getElementById('todo-list');
 
     listObjects.push(item);
@@ -226,7 +191,7 @@ function addItem(taskName, taskDescription, taskDeadline, taskCategory){
 
 //make the html for a to-do item
 function makeHTML(item){
-    return  '<li id="' + item.name + '" class="list-item padding-sm margin-sm" style="background-color: ' + item.category.color + '">'   +
+    return  '<li id="' + item.name + '" class="list-item padding-sm margin-sm' + (item.highlighted ? ' highlighted-item' : '') + '" style="background-color: ' + item.category.color + '">'   +
                 '<div>' + 'Name: '        + item.name           + '<span style="float: right;">Complete: <input onclick="toggleComplete(this)" ' + (item.complete ? 'checked' : '' ) + ' type="checkbox"/></span>' + '</div>' +
                 '<div>' + 'Description: ' + item.description    + '</div>' +
                 '<div>' + 'Deadline: '    + item.deadline       + '</div>' +
@@ -352,6 +317,123 @@ function resetNewItem(){
     categoryInput.value = categories[0].name;
 }
 
-function canvasMouseMove(event){
 
+
+
+/******************* Pie Chart Code **********************************************************************/
+function canvasMouseMove(event){
+    var point = canvasMouseLocation(event);
+    var graphPoint;//centered on graph point
+    var i;
+    var radius;
+    var inPie = false;
+
+    radius = canvas.width/2;
+    graphPoint = {x: point.x - canvas.width/2, y: -(point.y - canvas.height/2)};
+
+
+    for (i=0; i < sections.length; i++) {
+        if(isInCircle(graphPoint, radius) && isWithinAngle(sections[i].start, sections[i].end, graphPoint)){
+            highlightObjectsWithCategory(i);
+            i = sections.length;//break from loop
+            inPie = true;
+        }
+    }
+
+    if(!inPie){
+        unhighlightAll();
+    }
+}
+
+function unhighlightAll(){
+    var i;
+    for(i=0; i<listObjects.length;i++){
+        listObjects[i].highlighted = false;
+    }
+    reloadList();
+}
+
+function highlightObjectsWithCategory(category){
+    var i;
+
+    for(i=0; i<listObjects.length;i++){
+        if(listObjects[i].category.name === categories[category].name){
+            listObjects[i].highlighted = true;
+        }
+        else{
+            listObjects[i].highlighted = false;
+        }
+    }
+
+    reloadList();
+}
+
+function canvasMouseLocation(event){
+    var canvasLocation = canvas.getBoundingClientRect();
+    return {
+        x: event.clientX - canvasLocation.left,
+        y: event.clientY - canvasLocation.top
+    };
+}
+
+
+
+function isWithinAngle(a1, a2, point){
+    var pointAngle;
+
+    pointAngle = Math.atan(point.y / point.x);
+    if(point.x < 0){
+        pointAngle += Math.PI;
+    }
+    else if(point.y < 0){
+        pointAngle += Math.PI * 2;
+    }
+
+    return pointAngle > a1 && pointAngle < a2;
+}
+
+function isInCircle(point, radius){
+    var c2 = point.x * point.x + point.y * point.y;
+    return c2 <= radius * radius;
+}
+
+
+function updatePieChart(){
+    var prevSection = 0;
+    var numberOfCategories = {};
+    var i;
+    var centerX, centerY;
+    var radius = canvas.width/2 - 10;
+
+    //clear first pie chart
+    context.fillStyle = 'white';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    //find center of canvas
+    centerX = canvas.width  / 2;
+    centerY = canvas.height / 2;
+
+    //set all objects to zero
+    for(i=0; i<categories.length; i++){
+        numberOfCategories[categories[i].name] = 0;
+    }
+
+    //count all categories
+    for(i=0; i<listObjects.length; i++){
+        numberOfCategories[listObjects[i].category.name]++;
+    }
+
+
+    sections = [];
+
+    //draw each section
+    for(i=0; i<categories.length; i++){
+        sections.push({end: Math.PI * 2 - prevSection, start: Math.PI * 2 - (prevSection + (Math.PI * 2 * (numberOfCategories[categories[i].name] / listObjects.length)))});
+        context.fillStyle = categories[i].color;
+        context.beginPath();
+        context.arc     (centerX, centerY, radius, prevSection, prevSection + (Math.PI * 2 * (numberOfCategories[categories[i].name] / listObjects.length)), false);
+        context.lineTo  (centerX, centerY);
+        context.fill();
+        prevSection += Math.PI * 2 * (numberOfCategories[categories[i].name] / listObjects.length);
+    }
 }
