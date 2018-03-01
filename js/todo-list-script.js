@@ -107,6 +107,11 @@ function submitItem(){
         }
     }
 
+    if(add && !isValidDate(deadlineInput.value)){
+        alert('You must have a valid deadline in the form: "dd-mm-yyyy"');
+        add = false;
+    }
+
     if(add) {
         addItem(nameInput.value, descriptionInput.value, deadlineInput.value, getCategory(categoryInput.value), false);
         resetNewItem();
@@ -251,6 +256,8 @@ function closeItemCreator(){
 
     dimmerDom.style.visibility = 'hidden';
     newItem.style.visibility = 'hidden';
+
+    resetNewItem();
 }
 
 
@@ -313,6 +320,6 @@ function resetNewItem(){
 
     nameInput.value = '';
     descriptionInput.value = '';
-    deadlineInput.value = '2018-01-01'; //todo
+    deadlineInput.value = 'dd-mm-yyyy';
     categoryInput.value = categories[0].name;
 }
