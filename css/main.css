@@ -1,0 +1,25 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-style: normal;
+    font-family: Cambria, sans-serif;
+    font-size: 12pt;
+}
+
+.border-basic-rounded-md{
+    border-radius: 10px;
+    border: black solid 2px;
+}
+
+
+.pull-right{
+    float: right;
+}
+
+
+.top-action-bar{
+    background-color: lightseagreen;
+    height: 5vh;
+    min-height: 5vh;
+    max-height: 5vh;
+}

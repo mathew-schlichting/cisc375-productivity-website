@@ -24,11 +24,6 @@
     top: 0;
 }
 
-body{
-    margin: 0;
-    padding: 0;
-}
-
 #slideshow-view{
     display: none;
     position: fixed;
@@ -53,8 +48,8 @@ body{
 .slide {
     margin: 0 25vw;
     display: none;
-    width: 50vw;
-    height: 35vw;//change
+    width: 45vw;
+    height: 60vh;
     position: fixed;
     animation: fadeInAnimation 1s;
 }
@@ -86,11 +81,11 @@ body{
 }
 
 .prev{
-    left: 22vw;
+    left: 20vw;
 }
 
 .next {
-    left: 75vw;
+    left: 72vw;
 }
 
 .darken:hover{
@@ -98,7 +93,7 @@ body{
 }
 
 .thumb-slider{
-    top: 35vw;
+    top: 60vh;
     width: 80vw;
     left: 10vw;
     padding: 20px;
@@ -123,6 +118,6 @@ body{
     width: 6vw;
     font-size: 2em;
     margin-left: 47vw;
-    top: 44vw;
+    top: 80vh;
     height: 2em;
 }

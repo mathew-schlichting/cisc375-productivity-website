@@ -9,11 +9,6 @@ var playing = null;
 
 
 function init(){
-    console.log('Version 0.0.2');
-
-
-
-
     loadThumbnails();
     loadSlideshow();
     slideElements = document.getElementsByClassName('slide');
