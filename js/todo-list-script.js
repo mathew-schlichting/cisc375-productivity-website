@@ -102,7 +102,7 @@ function submitItem(){
 
     for (var i = 0; i < listObjects.length; i++) {
         if (nameInput.value === listObjects[i].name) {
-            alert('You already have a task with that name!')
+            alert('You already have a task with that name!');
             add = false;
         }
     }
@@ -294,7 +294,7 @@ function submitCategory() {
 
     for (var i = 0; i < categories.length; i++) {
         if (name === categories[i].name) {
-            alert('You already have a category with that name!')
+            alert('You already have a category with that name!');
             add = false;
         }
     }

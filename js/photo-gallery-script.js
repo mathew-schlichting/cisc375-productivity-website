@@ -175,7 +175,7 @@ function fade(element, start, direction, speed){
 }
 
 function clearPlay(element){
-    if(playing != null) {
+    if(playing !== null) {
         element.innerHTML = '&#9654;';
         clearInterval(playing);
         playing = null;
@@ -183,7 +183,7 @@ function clearPlay(element){
 }
 
 function playSlideshow(element){
-    if(playing != null){
+    if(playing !== null){
         clearPlay(element);
     }
     else {

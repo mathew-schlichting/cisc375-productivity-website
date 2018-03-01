@@ -127,7 +127,7 @@ function closeCalendar(){
 
 
 function isValidDate(date){
-    var result = false;
+    var result;
     var split = date.split('-');
     var d, m, y;
 
@@ -137,7 +137,7 @@ function isValidDate(date){
         d = split[0];
         m = split[1];
         y = split[2];
-        result = !isNaN(d), !isNaN(m), !isNaN(y);
+        result = !isNaN(d) && !isNaN(m) && !isNaN(y);
         if(result){
             result = m > 0 && m <= 12;
             if(result){

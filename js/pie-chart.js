@@ -37,12 +37,7 @@ function highlightObjectsWithCategory(category){
     var i;
 
     for(i=0; i<listObjects.length;i++){
-        if(listObjects[i].category.name === categories[category].name){
-            listObjects[i].highlighted = true;
-        }
-        else{
-            listObjects[i].highlighted = false;
-        }
+        listObjects[i].highlighted = listObjects[i].category.name === categories[category].name;
     }
 
     reloadList();
