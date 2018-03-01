@@ -1,0 +1,47 @@
+th {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    border: solid 1px #000000;
+    width: 3em;
+    height: 1em;
+    background-color: #FFFFFF;
+}
+
+td {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: normal;
+    border: solid 1px #000000;
+    width: 1em;
+    height: 1em;
+    background-color: #FFFFFF;
+}
+
+#calendar{
+    position: fixed;
+    width: 7vw;
+    height: 7vh;
+    border: solid black 1px;
+    left: 43vw;
+    top: 40vh;
+    z-index: 3;
+}
+
+#next_month, #prev_month {
+    cursor: pointer;
+}
+
+#next_month:hover, #prev_month:hover {
+    background-color: #E1E1E1;
+}
+
+.date {
+    background-color: #FFFFEE;
+    cursor: pointer;
+    text-align: center;
+}
+
+.date:hover {
+    background-color: #BFDCFF;
+}

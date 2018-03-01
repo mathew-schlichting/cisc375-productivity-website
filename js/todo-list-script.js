@@ -48,6 +48,7 @@ function init(){
     /* Init functionality */
     loadFromStorage();
     checkForEmptyList();
+    createCalendar();
 
     canvas = document.getElementById('pie-chart');
     context = canvas.getContext('2d');
@@ -55,7 +56,6 @@ function init(){
     canvas.height = 300;
     updatePieChart();
     canvas.onmousemove = canvasMouseMove;
-
     resetNewItem();
 }
 
