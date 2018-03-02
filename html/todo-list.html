@@ -67,10 +67,10 @@
 
                     <div class="margin-sm">
                         <div class="margin-sm">
-                            <span>Name: </span><input id="input-name" type="text"/>
+                            <span>Name: </span><input id="input-name" type="text" maxlength="10"/>
                         </div>
                         <div class="margin-sm">
-                            <span>Description: </span><input id="input-description" type="text"/>
+                            <span>Description: </span><input id="input-description" type="text" maxlength="30"/>
                         </div>
                         <div class="margin-sm">
                             <span>Deadline: </span><input id="input-deadline" type="text" value="2018-01-01"/>
@@ -81,7 +81,7 @@
                             <select id="input-category">
                                 <!-- options are filled on page load -->
                             </select>
-                            <input id="input-new-category-name" type="text" placeholder="Name of new Category"/>
+                            <input id="input-new-category-name" type="text" placeholder="Name of new Category" maxlength="15"/>
                             <input id="input-new-category-color" type="color"/>
                             <button onclick="submitCategory()">+</button>
                         </div>
