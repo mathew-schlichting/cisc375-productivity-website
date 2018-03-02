@@ -102,6 +102,7 @@
     float: left;
     padding: .5vw;
     width: 9.5vw;
+    height: 12vh;
     display: none;
     transition: transform .1s;
 }

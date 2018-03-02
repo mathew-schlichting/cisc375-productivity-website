@@ -72,11 +72,11 @@ function loadThumbnails(){
 }
 
 function getThumbSliderData(i){
-    return '<div id="thumb-'+ i + '" onclick="slideThumbClick(this);" class="slide-thumb"><img src="../media/images/pic' + i + '-thumb.jpg" style="width: 100%; height: 100%;"></div>';
+    return '<div id="thumb-'+ i + '" onclick="slideThumbClick(this);" class="slide-thumb"><img class="full-size" src="../media/images/pic' + i + '-thumb.jpg" ></div>';
 }
 
 function getSlideData(i){
-    return '<div class="slide"><img src="../media/images/pic' + i + '.jpg" style="width: 100%; height: 100%;"></div>';
+    return '<div class="slide"><img class="full-size" src="../media/images/pic' + i + '.jpg"></div>';
 }
 
 function getTableData(i){

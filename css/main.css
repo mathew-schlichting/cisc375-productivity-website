@@ -23,3 +23,8 @@ body{
     min-height: 5vh;
     max-height: 5vh;
 }
+
+.full-size{
+    width: 100%;
+    height: 100%;
+}
