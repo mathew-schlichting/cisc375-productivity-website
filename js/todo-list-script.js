@@ -18,13 +18,13 @@ var sortTechniques = {
         return 1;
     },
     DateUp: function(a, b){
-        if(a.deadline > b.deadline){
+        if(a.timestamp > b.timestamp){
             return 1;
         }
         return -1;
     },
     DateDown: function(a, b){
-        if(a.deadline > b.deadline){
+        if(a.timestamp > b.timestamp){
             return -1;
         }
         return 1;
@@ -36,6 +36,18 @@ var sortTechniques = {
             }
         }
         return -1;
+    },
+    DeadlineUp: function(a, b){
+        if(a.deadline > b.deadline){
+            return 1;
+        }
+        return -1;
+    },
+    DeadlineDown: function(a, b){
+        if(a.deadline > b.deadline){
+            return -1;
+        }
+        return 1;
     }
 };
 
@@ -100,20 +112,25 @@ function submitItem(){
     var add = true;
 
 
+    if(nameInput.value === '' || descriptionInput.value === '' || deadlineInput.value === ''){
+        alert('You must fill in all values!');
+        add = false;
+    }
+
     for (var i = 0; i < listObjects.length; i++) {
-        if (nameInput.value === listObjects[i].name) {
+        if (add && nameInput.value === listObjects[i].name) {
             alert('You already have a task with that name!');
             add = false;
         }
     }
 
     if(add && !isValidDate(deadlineInput.value)){
-        alert('You must have a valid deadline in the form: "dd-mm-yyyy"');
+        alert('You must have a valid deadline in the form: "mm-dd-yyyy"');
         add = false;
     }
 
     if(add) {
-        addItem(nameInput.value, descriptionInput.value, deadlineInput.value, getCategory(categoryInput.value), false);
+        addItem(nameInput.value, descriptionInput.value, deadlineInput.value, getCategory(categoryInput.value), new Date(), false);
         resetNewItem();
     }
 
@@ -320,6 +337,6 @@ function resetNewItem(){
 
     nameInput.value = '';
     descriptionInput.value = '';
-    deadlineInput.value = 'dd-mm-yyyy';
+    deadlineInput.value = '';
     categoryInput.value = categories[0].name;
 }

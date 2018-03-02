@@ -31,6 +31,8 @@
                             <option value="CategoryDown">Category &darr;</option>
                             <option value="DateUp">Date Created &uarr;</option>
                             <option value="DateDown">Date Created &darr;</option>
+                            <option value="DeadlineUp">Deadline &uarr;</option>
+                            <option value="DeadlineDown">Deadline &darr;</option>
                             <option value="Incomplete">Incomplete</option>
                         </select>
                         <button onclick="sortList()">Sort</button>
@@ -73,7 +75,7 @@
                             <span>Description: </span><input id="input-description" type="text" maxlength="30"/>
                         </div>
                         <div class="margin-sm">
-                            <span>Deadline: </span><input id="input-deadline" type="text" value="2018-01-01"/>
+                            <span>Deadline: </span><input id="input-deadline" type="text" placeholder="mm-dd-yyyy"/>
                             <button onclick="openCalendar()">Open Calendar</button>
                         </div>
                         <div class="margin-sm">

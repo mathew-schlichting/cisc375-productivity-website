@@ -122,7 +122,7 @@ function closeCalendar(){
     element.style.display = 'none';
     newItem.style.zIndex = 1;
 
-    input.value = day +'-'+ (month+1) +'-'+ year;
+    input.value = (month+1) +'-'+ day +'-'+ year;
 }
 
 
@@ -134,14 +134,14 @@ function isValidDate(date){
 
     result = split.length === 3;
     if(result){
-        d = split[0];
-        m = split[1];
+        m = split[0];
+        d = split[1];
         y = split[2];
         result = !isNaN(d) && !isNaN(m) && !isNaN(y);
         if(result){
             result = m > 0 && m <= 12;
             if(result){
-                result = d > 0 && d <= NO_DAYS_IN_MONTH[m];
+                result = d > 0 && d <= NO_DAYS_IN_MONTH[m-1];
                 result = result && y >= 2000 && y <= 9999;
             }
         }
